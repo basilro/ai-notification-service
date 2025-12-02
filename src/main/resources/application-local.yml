@@ -1,0 +1,19 @@
+# 로컬 개발 환경 설정
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/notification_db
+    username: postgres
+    password: postgres
+
+claude:
+  api:
+    key: ${CLAUDE_API_KEY}
+
+external:
+  weather:
+    api-key: ${WEATHER_API_KEY}
+
+logging:
+  level:
+    root: DEBUG
+    com.example.notification: TRACE

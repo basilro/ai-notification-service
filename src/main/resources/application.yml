@@ -1,0 +1,70 @@
+spring:
+  application:
+    name: ai-notification-service
+  
+  datasource:
+    url: jdbc:postgresql://localhost:5432/notification_db
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+
+server:
+  port: 8080
+
+# Claude API 설정
+claude:
+  api:
+    key: ${CLAUDE_API_KEY:your-api-key-here}
+    url: https://api.anthropic.com/v1/messages
+    model: claude-3-5-sonnet-20241022
+    max-tokens: 4096
+
+# 외부 API 설정
+external:
+  weather:
+    api-key: ${WEATHER_API_KEY:your-weather-api-key}
+    url: https://api.openweathermap.org/data/2.5/weather
+  stock:
+    api-key: ${STOCK_API_KEY:your-stock-api-key}
+    url: https://api.example.com/stock
+
+# 코드 실행 보안 설정
+security:
+  sandbox:
+    enabled: true
+    max-execution-time: 5000  # 밀리초
+    max-memory: 52428800      # 50MB
+    allowed-packages:
+      - java.lang
+      - java.util
+      - java.time
+      - java.math
+
+# 알림 설정
+notification:
+  websocket:
+    enabled: true
+  email:
+    enabled: false
+  push:
+    enabled: false
+  sms:
+    enabled: false
+
+logging:
+  level:
+    root: INFO
+    com.example.notification: DEBUG
